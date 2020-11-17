@@ -22,10 +22,12 @@ function Repos(props) {
     props.history.push(`/repos/${props.match.params.username}/${name}`);
   };
 
-  const handleFollowers = () => {
-    props.history.push(
-      `https://api.github.com/users/${props.match.params.username}/followers_url`
-    );
+  const handleFollowers = async () => {
+    const urlFollower = `https://api.github.com/users/${props.match.params.username}/followers`;
+    const res = await fetch(urlFollower);
+    const followers = await res.json();
+    console.log(followers);
+    // props.history.push(``);
   };
 
   useEffect(() => {
