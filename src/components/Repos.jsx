@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 function Repos(props) {
   const [loading, setLoading] = useState(true);
   const [repos, setRepos] = useState([]);
+  const [followers, setFollowers] = useState([]);
   let history = useHistory();
 
   const fetchRepos = async () => {
@@ -25,8 +26,9 @@ function Repos(props) {
   const handleFollowers = async () => {
     const urlFollower = `https://api.github.com/users/${props.match.params.username}/followers`;
     const res = await fetch(urlFollower);
-    const followers = await res.json();
-    console.log(followers);
+    const follower = await res.json();
+    setFollowers(follower);
+    console.log(follower);
     // props.history.push(``);
   };
 
@@ -66,7 +68,7 @@ function Repos(props) {
           <button className="btn-light" onClick={() => history.goBack()}>
             Back
           </button>
-          <button className="btn" onClick={handleFollowers}>
+          <button className="btn" onClick={handleFollowers} disabled>
             Followers
           </button>
           <section className="review">
