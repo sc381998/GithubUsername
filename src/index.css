@@ -127,7 +127,9 @@ body {
   margin-top: 2rem;
   font-size: 1.2rem;
 }
-
+.repo:hover {
+  border: 0.5rem solid rgba(16, 116, 231, 0.5);
+}
 main {
   width: 90vw;
   max-width: var(--fixed-width);

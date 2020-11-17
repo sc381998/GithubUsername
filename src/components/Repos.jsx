@@ -5,7 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 function Repos(props) {
   const [loading, setLoading] = useState(true);
   const [repos, setRepos] = useState([]);
-  const [followers, setFollowers] = useState([]);
+
   let history = useHistory();
 
   const fetchRepos = async () => {
@@ -21,15 +21,6 @@ function Repos(props) {
 
   const handleClick = (name) => {
     props.history.push(`/repos/${props.match.params.username}/${name}`);
-  };
-
-  const handleFollowers = async () => {
-    const urlFollower = `https://api.github.com/users/${props.match.params.username}/followers`;
-    const res = await fetch(urlFollower);
-    const follower = await res.json();
-    setFollowers(follower);
-    console.log(follower);
-    // props.history.push(``);
   };
 
   useEffect(() => {
@@ -55,7 +46,7 @@ function Repos(props) {
       </main>
     );
   }
-  console.log(props);
+
   return (
     <>
       <main>
@@ -68,9 +59,9 @@ function Repos(props) {
           <button className="btn-light" onClick={() => history.goBack()}>
             Back
           </button>
-          <button className="btn" onClick={handleFollowers} disabled>
-            Followers
-          </button>
+          <Link to={`/${props.match.params.username}/followers`}>
+            <button className="btn">Followers</button>
+          </Link>
           <section className="review">
             {repos.map((repo) => (
               <article
